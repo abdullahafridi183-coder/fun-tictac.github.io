@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Tic Tac Arena - premium browser Tic-Tac-Toe game">
+  <title>Tic Tac Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Tic Tac Arena home">
+        <span class="brand-mark">✦</span>
+        <span>
+          <strong>TIC TAC</strong>
+          <small>ARENA</small>
+        </span>
+      </a>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="soundBtn" aria-label="Toggle sound" title="Sound">🔊</button>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Theme">☀️</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="eyebrow">BROWSER GAME • QUICK MATCH</span>
+        <h1>Think fast.<br><span>Make your move.</span></h1>
+        <p>Challenge the AI or battle a friend on the same device.</p>
+      </div>
+      <div class="hero-badge">
+        <span>BEST OF</span>
+        <strong>∞</strong>
+        <small>ROUNDS</small>
+      </div>
+    </section>
+
+    <!-- Monetization-ready slot. Keep hidden until an ad provider is configured. -->
+    <div class="ad-slot ad-top" id="adTop" aria-label="Advertisement">
+      <span>ADVERTISEMENT</span>
+    </div>
+
+    <section class="game-layout">
+      <aside class="panel settings-panel">
+        <div class="panel-heading">
+          <span>GAME MODE</span>
+          <span class="live-dot"></span>
+        </div>
+
+        <div class="mode-tabs" role="tablist">
+          <button class="mode-btn active" data-mode="ai">VS AI</button>
+          <button class="mode-btn" data-mode="local">2 PLAYERS</button>
+        </div>
+
+        <div class="difficulty-wrap" id="difficultyWrap">
+          <label for="difficulty">AI DIFFICULTY</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <div class="side-divider"></div>
+
+        <div class="scoreboard">
+          <div class="score-card x-card">
+            <span class="score-label">PLAYER X</span>
+            <strong id="scoreX">0</strong>
+            <small id="xName">YOU</small>
+          </div>
+          <div class="score-card draw-card">
+            <span class="score-label">DRAWS</span>
+            <strong id="scoreDraw">0</strong>
+            <small>ROUNDS</small>
+          </div>
+          <div class="score-card o-card">
+            <span class="score-label">PLAYER O</span>
+            <strong id="scoreO">0</strong>
+            <small id="oName">AI</small>
+          </div>
+        </div>
+
+        <button class="reset-score" id="resetScore">Reset statistics</button>
+      </aside>
+
+      <section class="game-panel">
+        <div class="match-header">
+          <div>
+            <span class="eyebrow">CURRENT MATCH</span>
+            <h2 id="statusText">Your turn</h2>
+          </div>
+          <div class="turn-pill" id="turnPill"><span class="turn-dot x"></span>X</div>
+        </div>
+
+        <div class="board-wrap">
+          <div class="win-line" id="winLine"></div>
+          <div class="board" id="board" role="grid" aria-label="Tic Tac Toe board">
+            <button class="cell" data-index="0" aria-label="Cell 1"></button>
+            <button class="cell" data-index="1" aria-label="Cell 2"></button>
+            <button class="cell" data-index="2" aria-label="Cell 3"></button>
+            <button class="cell" data-index="3" aria-label="Cell 4"></button>
+            <button class="cell" data-index="4" aria-label="Cell 5"></button>
+            <button class="cell" data-index="5" aria-label="Cell 6"></button>
+            <button class="cell" data-index="6" aria-label="Cell 7"></button>
+            <button class="cell" data-index="7" aria-label="Cell 8"></button>
+            <button class="cell" data-index="8" aria-label="Cell 9"></button>
+          </div>
+        </div>
+
+        <div class="match-actions">
+          <button class="primary-btn" id="newRound">New Round <span>↗</span></button>
+          <button class="secondary-btn" id="resetMatch">Reset Match</button>
+        </div>
+      </section>
+    </section>
+
+    <div class="ad-slot ad-bottom" id="adBottom" aria-label="Advertisement">
+      <span>ADVERTISEMENT</span>
+    </div>
+
+    <section class="features">
+      <article>
+        <span class="feature-icon">⚡</span>
+        <div><strong>Instant Play</strong><p>No downloads. No waiting.</p></div>
+      </article>
+      <article>
+        <span class="feature-icon">🧠</span>
+        <div><strong>Smart AI</strong><p>Three difficulty levels.</p></div>
+      </article>
+      <article>
+        <span class="feature-icon">📱</span>
+        <div><strong>Every Screen</strong><p>Built for mobile & desktop.</p></div>
+      </article>
+    </section>
+
+    <footer>
+      <span>© <span id="year"></span> Tic Tac Arena</span>
+      <span>Play fair • Have fun</span>
+    </footer>
+  </main>
+
+  <div class="modal-backdrop" id="resultModal" hidden>
+    <div class="result-modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <div class="result-icon" id="resultIcon">✦</div>
+      <span class="eyebrow">ROUND COMPLETE</span>
+      <h2 id="resultTitle">You Win!</h2>
+      <p id="resultMessage">Excellent move.</p>
+      <div class="result-stats">
+        <div><strong id="modalX">0</strong><span>X SCORE</span></div>
+        <div><strong id="modalDraw">0</strong><span>DRAWS</span></div>
+        <div><strong id="modalO">0</strong><span>O SCORE</span></div>
+      </div>
+      <button class="primary-btn modal-btn" id="modalNewRound">Play Again <span>↗</span></button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
